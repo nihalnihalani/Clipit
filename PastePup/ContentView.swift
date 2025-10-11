@@ -250,14 +250,43 @@ struct ContentView: View {
                                         .font(.title2)
                                         .fontWeight(.bold)
                                     
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        Text("Content:")
-                                            .font(.headline)
-                                            .foregroundColor(.secondary)
-                                        Text(item.content)
-                                            .padding()
-                                            .background(Color.gray.opacity(0.1))
-                                            .cornerRadius(8)
+                                    // Show image or text content
+                                    if item.contentType == "image", let imagePath = item.imagePath, let nsImage = loadImage(from: imagePath) {
+                                        VStack(alignment: .leading, spacing: 12) {
+                                            Text("Image:")
+                                                .font(.headline)
+                                                .foregroundColor(.secondary)
+                                            
+                                            Text(item.content)
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                                .padding(8)
+                                                .background(Color.blue.opacity(0.1))
+                                                .cornerRadius(6)
+                                            
+                                            Image(nsImage: nsImage)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(maxHeight: 400)
+                                                .cornerRadius(8)
+                                            
+                                            Button(action: {
+                                                copyImageToClipboard(imagePath: imagePath)
+                                            }) {
+                                                Label("Copy to Clipboard", systemImage: "doc.on.clipboard")
+                                            }
+                                            .buttonStyle(.borderedProminent)
+                                        }
+                                    } else {
+                                        VStack(alignment: .leading, spacing: 8) {
+                                            Text("Content:")
+                                                .font(.headline)
+                                                .foregroundColor(.secondary)
+                                            Text(item.content)
+                                                .padding()
+                                                .background(Color.gray.opacity(0.1))
+                                                .cornerRadius(8)
+                                        }
                                     }
                                     
                                     VStack(alignment: .leading, spacing: 8) {
@@ -345,9 +374,20 @@ struct ContentView: View {
                                 .padding()
                             } label: {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(item.content)
-                                        .lineLimit(2)
-                                        .font(.body)
+                                    // Show image indicator with AI summary or text content
+                                    if item.contentType == "image" {
+                                        HStack(spacing: 6) {
+                                            Image(systemName: "photo")
+                                                .foregroundColor(.blue)
+                                            Text(item.content)
+                                                .lineLimit(2)
+                                                .font(.body)
+                                        }
+                                    } else {
+                                        Text(item.content)
+                                            .lineLimit(2)
+                                            .font(.body)
+                                    }
                                     
                                     // Show tags inline if available
                                     if !item.tags.isEmpty {
@@ -381,6 +421,44 @@ struct ContentView: View {
                                             .foregroundColor(.secondary)
                                     }
                                 }
+                            }
+                            .contextMenu {
+                                if item.contentType == "image", let imagePath = item.imagePath {
+                                    Button(action: {
+                                        copyImageToClipboard(imagePath: imagePath)
+                                    }) {
+                                        Label("Copy Image", systemImage: "doc.on.clipboard")
+                                    }
+                                } else {
+                                    Button(action: {
+                                        let pasteboard = NSPasteboard.general
+                                        pasteboard.clearContents()
+                                        pasteboard.setString(item.content, forType: .string)
+                                    }) {
+                                        Label("Copy Text", systemImage: "doc.on.clipboard")
+                                    }
+                                }
+                                
+                                Divider()
+                                
+                                Button(role: .destructive, action: {
+                                    deleteItem(item)
+                                }) {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                            
+                            // Quick copy button for images
+                            if item.contentType == "image", let imagePath = item.imagePath {
+                                Button(action: {
+                                    copyImageToClipboard(imagePath: imagePath)
+                                }) {
+                                    Image(systemName: "doc.on.clipboard")
+                                        .foregroundColor(.blue)
+                                        .frame(width: 20, height: 20)
+                                }
+                                .buttonStyle(.plain)
+                                .help("Copy image to clipboard")
                             }
                             
                             // Delete button
@@ -638,11 +716,13 @@ struct ContentView: View {
             print("   🎯 Clipboard context: \(clipboardContext.count) items")
             print("   Items with tags: \(clipboardContext.filter { !$0.tags.isEmpty }.count)")
             
-            // Generate answer using selected AI service
+            // Generate answer using selected AI service (with image detection for OpenAI)
             let answer: String?
+            let imageIndex: Int?
+            
             switch selectedAIService {
             case .openai:
-                answer = await openAIService.generateAnswer(
+                (answer, imageIndex) = await openAIService.generateAnswerWithImageDetection(
                     question: capturedText,
                     clipboardContext: clipboardContext,
                     appName: clipboardMonitor.currentAppName
@@ -653,9 +733,55 @@ struct ContentView: View {
                     clipboardContext: clipboardContext,
                     appName: clipboardMonitor.currentAppName
                 )
+                imageIndex = nil
             }
             
-            if let answer = answer {
+            // Check if AI wants to paste an image
+            if let imageIndex = imageIndex, imageIndex > 0, imageIndex <= recentItems.count {
+                let item = recentItems[imageIndex - 1]
+                
+                if item.contentType == "image", let imagePath = item.imagePath {
+                    print("   🖼️ Pasting image from item \(imageIndex)")
+                    
+                    // Copy image to clipboard
+                    copyImageToClipboard(imagePath: imagePath)
+                    
+                    // Delete the original item from history to avoid duplicates
+                    await MainActor.run {
+                        print("   🗑️ Deleting original image item from history")
+                        if let vid = item.vectorId {
+                            embeddingService.deleteDocument(vectorId: vid)
+                        }
+                        modelContext.delete(item)
+                        try? modelContext.save()
+                    }
+                    
+                    // Simulate paste (Cmd+V)
+                    await MainActor.run {
+                        // Delete the captured text first
+                        textCaptureService.replaceCapturedTextWithAnswer("")
+                        
+                        // Small delay to ensure text is cleared
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            // Simulate Cmd+V
+                            let source = CGEventSource(stateID: .hidSystemState)
+                            let vKeyDown = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: true)
+                            let vKeyUp = CGEvent(keyboardEventSource: source, virtualKey: 0x09, keyDown: false)
+                            vKeyDown?.flags = .maskCommand
+                            vKeyUp?.flags = .maskCommand
+                            vKeyDown?.post(tap: .cghidEventTap)
+                            vKeyUp?.post(tap: .cghidEventTap)
+                            
+                            self.floatingDogController.updateMessage("Image pasted! 🖼️", isLoading: false)
+                        }
+                    }
+                } else {
+                    print("   ⚠️ Item \(imageIndex) is not an image")
+                    await MainActor.run {
+                        floatingDogController.updateMessage("That's not an image 🤔", isLoading: false)
+                    }
+                }
+            } else if let answer = answer {
                 // Check if answer is empty or just whitespace
                 let trimmedAnswer = answer.trimmingCharacters(in: .whitespacesAndNewlines)
                 
@@ -737,6 +863,34 @@ struct ContentView: View {
         let prefix = key.prefix(7)
         let suffix = key.suffix(4)
         return "\(prefix)...\(suffix)"
+    }
+    
+    private func getImagesDirectory() -> URL {
+        let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        return appSupport.appendingPathComponent("PastePup/Images")
+    }
+    
+    private func loadImage(from path: String) -> NSImage? {
+        let imageURL = getImagesDirectory().appendingPathComponent(path)
+        return NSImage(contentsOf: imageURL)
+    }
+    
+    private func copyImageToClipboard(imagePath: String) {
+        let imageURL = getImagesDirectory().appendingPathComponent(imagePath)
+        
+        guard let nsImage = NSImage(contentsOf: imageURL) else {
+            print("❌ Failed to load image from disk")
+            return
+        }
+        
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        
+        // Write image using writeObjects for proper clipboard handling
+        pasteboard.writeObjects([nsImage])
+        
+        print("✅ Image copied to clipboard")
+        print("   Pasteboard types: \(pasteboard.types ?? [])")
     }
 }
 

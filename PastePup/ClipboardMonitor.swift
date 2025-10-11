@@ -238,14 +238,91 @@ class ClipboardMonitor: ObservableObject {
         if currentChangeCount != lastChangeCount {
             lastChangeCount = currentChangeCount
             
-            // Get clipboard content
-            if let string = pasteboard.string(forType: .string) {
+            // Check for images first
+            if let imageData = pasteboard.data(forType: .tiff) ?? pasteboard.data(forType: .png) {
+                clipboardContent = "[Image]"
+                saveImageItem(imageData: imageData)
+            }
+            // Then check for text
+            else if let string = pasteboard.string(forType: .string) {
                 clipboardContent = string
-                
-                // Save to database
                 saveClipboardItem(content: string)
             } else {
                 clipboardContent = ""
+            }
+        }
+    }
+    
+    private func getImagesDirectory() -> URL {
+        let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let imagesDir = appSupport.appendingPathComponent("PastePup/Images")
+        
+        // Create directory if it doesn't exist
+        try? FileManager.default.createDirectory(at: imagesDir, withIntermediateDirectories: true)
+        
+        return imagesDir
+    }
+    
+    private func saveImageItem(imageData: Data) {
+        guard let modelContext = modelContext else { return }
+        
+        print("💾 [ClipboardMonitor] Saving new image item...")
+        print("   Size: \(imageData.count) bytes")
+        print("   App: \(currentAppName)")
+        
+        // Convert image to PNG format (OpenAI only accepts PNG, JPEG, GIF, WebP)
+        guard let nsImage = NSImage(data: imageData),
+              let pngData = nsImage.pngData() else {
+            print("   ❌ Failed to convert image to PNG format")
+            return
+        }
+        
+        print("   ✅ Converted to PNG: \(pngData.count) bytes")
+        
+        // 1. Save image to disk
+        let filename = "\(UUID().uuidString).png"
+        let imageURL = getImagesDirectory().appendingPathComponent(filename)
+        
+        do {
+            try pngData.write(to: imageURL)
+            print("   ✅ Image saved to disk: \(filename)")
+        } catch {
+            print("   ❌ Failed to save image to disk: \(error)")
+            return
+        }
+        
+        // 2. Analyze image with OpenAI Vision (async)
+        Task {
+            let description = await openAIService?.analyzeImage(imageData: pngData) ?? "[Image]"
+            
+            print("   📝 Image description: \(description)")
+            
+            // 3. Create item with description as searchable content
+            let newItem = Item(
+                timestamp: Date(),
+                content: description,
+                appName: currentAppName.isEmpty ? nil : currentAppName,
+                contentType: "image",
+                imagePath: filename
+            )
+            
+            // 4. Generate embeddings from description for search
+            let vectorId = UUID()
+            newItem.vectorId = vectorId
+            
+            modelContext.insert(newItem)
+            
+            do {
+                try modelContext.save()
+                print("   ✅ Image item saved to database with description")
+                
+                // 5. Store embedding for semantic search
+                if let embeddingService = embeddingService {
+                    await embeddingService.addDocument(vectorId: vectorId, text: description)
+                    print("   ✅ Image embedding stored for search")
+                }
+            } catch {
+                print("   ❌ Failed to save image item: \(error)")
             }
         }
     }
@@ -425,5 +502,16 @@ private struct AXUIElementHash: Hashable {
     }
     static func == (lhs: AXUIElementHash, rhs: AXUIElementHash) -> Bool {
         lhs.element == rhs.element
+    }
+}
+
+// MARK: - NSImage PNG Conversion Extension
+extension NSImage {
+    func pngData() -> Data? {
+        guard let tiffData = self.tiffRepresentation,
+              let bitmapImage = NSBitmapImageRep(data: tiffData) else {
+            return nil
+        }
+        return bitmapImage.representation(using: .png, properties: [:])
     }
 }

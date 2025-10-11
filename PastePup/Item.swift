@@ -10,13 +10,15 @@ final class Item {
     var usageCount: Int
     var vectorId: UUID?
     var tags: [String] // AI-generated semantic tags for better retrieval
+    var imagePath: String? // Path to saved image file (for image clipboard items)
     
-    init(timestamp: Date, content: String = "", appName: String? = nil, contentType: String = "text") {
+    init(timestamp: Date, content: String = "", appName: String? = nil, contentType: String = "text", imagePath: String? = nil) {
         self.timestamp = timestamp
         self.content = content
         self.appName = appName
         self.contentType = contentType
         self.usageCount = 0
         self.tags = []
+        self.imagePath = imagePath
     }
 }

@@ -68,12 +68,13 @@ class OpenAIService: ObservableObject {
     }
     
     /// Generate an answer based on user question and clipboard context
-    func generateAnswer(
+    /// Returns tuple: (textAnswer, imageIndexToPaste)
+    func generateAnswerWithImageDetection(
         question: String,
         clipboardContext: [(content: String, tags: [String])],
         appName: String?
-    ) async -> String? {
-        print("🤖 [OpenAIService] Generating answer...")
+    ) async -> (answer: String?, imageIndex: Int?) {
+        print("🤖 [OpenAIService] Generating answer with image detection...")
         print("   Question: \(question)")
         print("   Clipboard items: \(clipboardContext.count)")
         
@@ -84,12 +85,30 @@ class OpenAIService: ObservableObject {
         let prompt = buildAnswerPrompt(question: question, clipboardContext: clipboardContext, appName: appName)
         
         // Make API call
-        guard let answer = await callOpenAIForAnswer(prompt: prompt) else {
+        guard let (answer, imageIndex) = await callOpenAIForAnswerWithImage(prompt: prompt) else {
             print("   ❌ Failed to generate answer")
-            return nil
+            return (nil, nil)
         }
         
-        print("   ✅ Generated answer: \(answer.prefix(100))...")
+        if let imageIndex = imageIndex, imageIndex > 0 {
+            print("   ✅ Detected image paste request: item \(imageIndex)")
+        } else {
+            print("   ✅ Generated answer: \(answer?.prefix(100) ?? "empty")...")
+        }
+        return (answer, imageIndex)
+    }
+    
+    /// Legacy method for backward compatibility
+    func generateAnswer(
+        question: String,
+        clipboardContext: [(content: String, tags: [String])],
+        appName: String?
+    ) async -> String? {
+        let (answer, _) = await generateAnswerWithImageDetection(
+            question: question,
+            clipboardContext: clipboardContext,
+            appName: appName
+        )
         return answer
     }
     
@@ -142,19 +161,23 @@ class OpenAIService: ObservableObject {
         App: \(appName ?? "Unknown")
         
         CRITICAL RULES:
-        1. Answer ONLY the user's question directly
-        2. Do NOT add ANY commentary about: API calls, processing, clipboard management, or system operations
-        3. Do NOT mention "efficiency", "optimization", "wasted calls", or similar meta-topics
+        1. If user asks to paste/show/insert an image (e.g., "paste image 3", "show the screenshot"), return the item number in the paste_image field
+        2. For text questions, answer directly in the A field
+        3. Do NOT add commentary about API calls, processing, or system operations
         4. If question is not about clipboard content, return empty string
         5. Keep answer concise and directly relevant
         
-        OUTPUT FORMAT - Return ONLY this JSON structure, nothing else:
+        OUTPUT FORMAT - Return ONLY this JSON structure:
         {
-          "A": "your direct answer here"
+          "A": "your text answer here (empty if pasting image)",
+          "paste_image": 0
         }
         
-        If not relevant to clipboard:
-        {"A": ""}
+        Set paste_image to the item number (1-based) if user wants to paste an image, otherwise 0.
+        Examples:
+        - "paste image 3" → {"A": "", "paste_image": 3}
+        - "show the screenshot" → {"A": "", "paste_image": 1}
+        - "what was that code?" → {"A": "the code snippet...", "paste_image": 0}
         """
         
         return prompt
@@ -186,6 +209,109 @@ class OpenAIService: ObservableObject {
         """
         
         return prompt
+    }
+    
+    private func callOpenAIForAnswerWithImage(prompt: String) async -> (String?, Int?)? {
+        guard !apiKey.isEmpty, apiKey != "your-api-key-here" else {
+            print("   ⚠️  No valid API key configured")
+            return nil
+        }
+        
+        print("   📤 Sending prompt to OpenAI for answer using Responses API:")
+        
+        // New Responses API format for gpt-5-nano (answering)
+        let requestBody: [String: Any] = [
+            "model": "gpt-5",
+            "input": [
+                [
+                    "type": "message",
+                    "role": "user",
+                    "content": prompt
+                ]
+            ],
+            "text": [
+                "format": [
+                    "type": "json_object"
+                ]
+            ],
+            "reasoning": [
+                "effort": "low",
+                "summary": NSNull()
+            ] as [String: Any],
+            "tools": [],
+            "max_output_tokens": 2048
+        ]
+        
+        guard let url = URL(string: responsesURL) else {
+            lastError = "Invalid URL"
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                lastError = "Invalid response"
+                return nil
+            }
+            
+            print("   📡 OpenAI Response Status: \(httpResponse.statusCode)")
+            
+            guard httpResponse.statusCode == 200 else {
+                let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+                lastError = "API Error (\(httpResponse.statusCode)): \(errorMessage)"
+                print("   ❌ API Error: \(errorMessage)")
+                return nil
+            }
+            
+            // Parse response using new Responses API structure
+            let decoder = JSONDecoder()
+            let apiResponse = try decoder.decode(OpenAIResponsesAPIResponse.self, from: data)
+            
+            // Extract JSON content from response
+            guard let output = apiResponse.output else {
+                lastError = "No output in response"
+                return nil
+            }
+            
+            let messageOutput = output.first { $0.type == "message" }
+            guard let jsonText = messageOutput?.actualContent else {
+                lastError = "No message content in response"
+                return nil
+            }
+            
+            print("   📝 Extracted JSON: \(jsonText)")
+            
+            // Parse the JSON to extract both answer and paste_image
+            if let jsonData = jsonText.data(using: .utf8),
+               let jsonObject = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] {
+                let answer = (jsonObject["A"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+                let pasteImage = jsonObject["paste_image"] as? Int
+                
+                if let pasteImage = pasteImage, pasteImage > 0 {
+                    print("   ✅ Image paste detected: item \(pasteImage)")
+                    return (answer, pasteImage)
+                } else {
+                    print("   ✅ Text answer: \(answer?.prefix(100) ?? "empty")...")
+                    return (answer, nil)
+                }
+            }
+            
+            // Fallback
+            return (jsonText.trimmingCharacters(in: .whitespacesAndNewlines), nil)
+            
+        } catch {
+            lastError = error.localizedDescription
+            print("   ❌ Error: \(error)")
+            return nil
+        }
     }
     
     private func callOpenAIForAnswer(prompt: String) async -> String? {
@@ -419,6 +545,82 @@ class OpenAIService: ObservableObject {
         }
     }
     
+    /// Analyze image and return a summary description
+    func analyzeImage(imageData: Data) async -> String? {
+        guard !apiKey.isEmpty, apiKey != "your-api-key-here" else {
+            print("   ⚠️  No valid API key configured")
+            return nil
+        }
+        
+        print("🖼️ [OpenAIService] Analyzing image...")
+        print("   Image size: \(imageData.count) bytes")
+        
+        let base64Image = imageData.base64EncodedString()
+        
+        let requestBody: [String: Any] = [
+            "model": "gpt-4.1-mini",
+            "messages": [
+                [
+                    "role": "user",
+                    "content": [
+                        [
+                            "type": "text",
+                            "text": "give quick summary of it."
+                        ],
+                        [
+                            "type": "image_url",
+                            "image_url": [
+                                "url": "data:image/png;base64,\(base64Image)"
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            "max_tokens": 500
+        ]
+        
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                return nil
+            }
+            
+            print("   📡 OpenAI Vision Response Status: \(httpResponse.statusCode)")
+            
+            guard httpResponse.statusCode == 200 else {
+                let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+                print("   ❌ API Error: \(errorMessage)")
+                return nil
+            }
+            
+            // Parse response
+            if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let choices = json["choices"] as? [[String: Any]],
+               let firstChoice = choices.first,
+               let message = firstChoice["message"] as? [String: Any],
+               let content = message["content"] as? String {
+                print("   ✅ Image analysis: \(content.prefix(100))...")
+                return content
+            }
+            
+            return nil
+        } catch {
+            print("   ❌ Error: \(error)")
+            return nil
+        }
+    }
+    
     /// Convenience method to get API key from environment
     static func fromEnvironment() -> OpenAIService? {
         if let apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] {
@@ -427,4 +629,3 @@ class OpenAIService: ObservableObject {
         return nil
     }
 }
-
