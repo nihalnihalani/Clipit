@@ -30,19 +30,19 @@ struct ContentView: View {
     @State private var selectedAIService: AIServiceType = .openai
     @State private var lastCapturedText: String = ""
     @State private var isProcessingAnswer: Bool = false
-    @StateObject private var floatingDogController = FloatingDogWindowController()
+    @StateObject private var floatingClippyController = FloatingClippyWindowController()
     @State private var editingTagsFor: Item?
     @State private var newTagInput: String = ""
 
     var body: some View {
         NavigationSplitView {
             VStack(spacing: 0) {
-                // Dog Behavior
+                // Clippy Behavior
                 VStack(spacing: 12) {
-                    Toggle("Show dog when active", isOn: $floatingDogController.followTextInput)
-                        .help("When enabled, the dog will appear in the top-right corner when you're using text inputs. Press ESC to dismiss it.")
-                        .onChange(of: floatingDogController.followTextInput) { _, newValue in
-                            floatingDogController.setFollowTextInput(newValue)
+                    Toggle("Show Clippy when active", isOn: $floatingClippyController.followTextInput)
+                        .help("When enabled, Clippy will appear in the top-right corner when you're using text inputs. Press ESC to dismiss it.")
+                        .onChange(of: floatingClippyController.followTextInput) { _, newValue in
+                            floatingClippyController.setFollowTextInput(newValue)
                         }
                 }
                 .padding(.horizontal, 20)
@@ -687,7 +687,7 @@ struct ContentView: View {
         } else {
             // Start capturing
             print("   Starting text capture...")
-            floatingDogController.show(message: "PastePup is listening...", isLoading: false)
+            floatingClippyController.show(message: "PastePup is listening...", isLoading: false)
             
             textCaptureService.startCapturing { capturedText in
                 print("   ✅ Text captured: '\(capturedText)'")
@@ -706,7 +706,7 @@ struct ContentView: View {
         print("   Available items in DB: \(items.count)")
         
         isProcessingAnswer = true
-        floatingDogController.updateMessage("PastePup is thinking...", isLoading: true)
+        floatingClippyController.updateMessage("PastePup is thinking...", isLoading: true)
         
         Task {
             // Get recent clipboard items for context (with tags)
@@ -772,13 +772,13 @@ struct ContentView: View {
                             vKeyDown?.post(tap: .cghidEventTap)
                             vKeyUp?.post(tap: .cghidEventTap)
                             
-                            self.floatingDogController.updateMessage("Image pasted! 🖼️", isLoading: false)
+                            self.floatingClippyController.updateMessage("Image pasted! 🖼️", isLoading: false)
                         }
                     }
                 } else {
                     print("   ⚠️ Item \(imageIndex) is not an image")
                     await MainActor.run {
-                        floatingDogController.updateMessage("That's not an image 🤔", isLoading: false)
+                        floatingClippyController.updateMessage("That's not an image 🤔", isLoading: false)
                     }
                 }
             } else if let answer = answer {
@@ -793,14 +793,14 @@ struct ContentView: View {
                     
                     // Show success message briefly
                     await MainActor.run {
-                        floatingDogController.updateMessage("Answer ready! 🎉", isLoading: false)
+                        floatingClippyController.updateMessage("Answer ready! 🎉", isLoading: false)
                     }
                 } else {
                     print("   ℹ️ Question not relevant to clipboard history - no replacement")
                     
                     // Don't replace text, just show a message
                     await MainActor.run {
-                        floatingDogController.updateMessage("Question not relevant to clipboard 📋", isLoading: false)
+                        floatingClippyController.updateMessage("Question not relevant to clipboard 📋", isLoading: false)
                     }
                 }
             } else {
@@ -810,14 +810,14 @@ struct ContentView: View {
                 
                 // Show error message briefly
                 await MainActor.run {
-                    floatingDogController.updateMessage("Oops! Something went wrong 😅", isLoading: false)
+                    floatingClippyController.updateMessage("Oops! Something went wrong 😅", isLoading: false)
                 }
             }
             
             // Stop loading animation
             await MainActor.run {
                 isProcessingAnswer = false
-                // Dog will auto-hide after showing result (handled by FloatingDogWindowController)
+                // Clippy will auto-hide after showing result (handled by FloatingClippyWindowController)
             }
         }
     }

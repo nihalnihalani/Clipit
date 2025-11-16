@@ -1,0 +1,35 @@
+CLIPPY ANIMATED GIF PLACEHOLDER
+
+The project requires a Clippy.gif file in the root directory.
+
+Download Options:
+
+1. LottieFiles (Recommended):
+   - Visit: https://lottiefiles.com/free-animation/clippy-u9jOr2AeCn
+   - Download as GIF or convert Lottie JSON to GIF
+   
+2. Create from scratch:
+   - Use any animation tool
+   - Create bouncing/animated paperclip
+   - Export as GIF (128x128 to 256x256 pixels)
+
+3. Temporary Fallback:
+   - The app will use CuteDog.gif as fallback if Clippy.gif is not found
+   - Paperclip emoji (📎) will display if no GIF is available
+
+Specifications:
+- Filename: Clippy.gif
+- Location: Project root directory (same level as CuteDog.gif)
+- Size: 128x128 to 256x256 pixels
+- Format: Animated GIF with transparency
+- Frame rate: ~30 FPS recommended
+- Loop: Should loop seamlessly
+
+File Structure:
+PastePup/
+├── Clippy.gif  ← Place file here
+├── CuteDog.gif (current fallback)
+└── ...
+
+Once added, you can optionally remove CuteDog.gif and this placeholder file.
+

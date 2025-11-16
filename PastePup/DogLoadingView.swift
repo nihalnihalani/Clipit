@@ -2,12 +2,12 @@ import SwiftUI
 import AppKit
 import ImageIO
 
-struct DogLoadingView: View {
+struct ClippyLoadingView: View {
     let isLoading: Bool
     let message: String
     let animationResetID: UUID
 
-    init(isLoading: Bool = false, message: String = "PastePup is ready to fetch!", animationResetID: UUID = UUID()) {
+    init(isLoading: Bool = false, message: String = "Clippy is ready to help!", animationResetID: UUID = UUID()) {
         self.isLoading = isLoading
         self.message = message
         self.animationResetID = animationResetID
@@ -15,7 +15,7 @@ struct DogLoadingView: View {
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            PixelArtCorgi(isAnimating: isLoading, resetID: animationResetID)
+            AnimatedClippy(isAnimating: isLoading, resetID: animationResetID)
                 .frame(width: 77, height: 77)
                 .background(Color.clear)
                 .accessibilityHidden(true)
@@ -35,22 +35,22 @@ struct DogLoadingView: View {
 
     private var accessibilityDescription: String {
         isLoading
-            ? "PastePup is busy fetching. \(message)"
-            : "PastePup is idle. \(message)"
+            ? "Clippy is busy helping. \(message)"
+            : "Clippy is ready. \(message)"
     }
 }
 
-private struct PixelArtCorgi: View {
+private struct AnimatedClippy: View {
     let isAnimating: Bool
     let resetID: UUID
     
     var body: some View {
-        AnimatedDogPlayer(isProcessing: isAnimating, resetID: resetID)
+        AnimatedClippyPlayer(isProcessing: isAnimating, resetID: resetID)
     }
 }
 
-// GIF frame-based animated dog view
-private struct AnimatedDogPlayer: NSViewRepresentable {
+// GIF frame-based animated Clippy view
+private struct AnimatedClippyPlayer: NSViewRepresentable {
     let isProcessing: Bool
     let resetID: UUID
     
@@ -65,21 +65,29 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
         containerView.wantsLayer = true
         containerView.layer?.backgroundColor = NSColor.clear.cgColor
         
-        // Get the GIF from bundle
-        guard let gifImage = NSImage(named: "CuteDog") else {
-            print("⚠️ CuteDog.gif not found in bundle")
+        // Get the GIF from bundle - try Clippy first, fallback to CuteDog if not found yet
+        var gifImage = NSImage(named: "Clippy")
+        if gifImage == nil {
+            gifImage = NSImage(named: "CuteDog")
+            if gifImage != nil {
+                print("ℹ️ Using CuteDog.gif as fallback - please replace with Clippy.gif")
+            }
+        }
+        
+        guard let gif = gifImage else {
+            print("⚠️ Clippy.gif not found in bundle (see CLIPPY_ASSETS_INSTRUCTIONS.md)")
             return createFallbackView()
         }
         
-        print("🎬 [DogLoadingView] Found GIF image")
+        print("🎬 [ClippyLoadingView] Found GIF image")
         
         // Extract frames from GIF
-        guard let frames = extractFramesFromGIF(gifImage) else {
+        guard let frames = extractFramesFromGIF(gif) else {
             print("⚠️ Could not extract frames from GIF")
             return createFallbackView()
         }
         
-        print("🎬 [DogLoadingView] Extracted \(frames.count) frames from GIF")
+        print("🎬 [ClippyLoadingView] Extracted \(frames.count) frames from GIF")
         
         // Create NSImageView for frame-by-frame playback
         let imageView = NSImageView()
@@ -109,15 +117,20 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
             await context.coordinator.startAnimation(resetID: resetID)
         }
         
-        print("🎬 [DogLoadingView] Starting frame animation")
+        print("🎬 [ClippyLoadingView] Starting frame animation")
         
         return containerView
     }
     
     private func extractFramesFromGIF(_ gifImage: NSImage) -> [NSImage]? {
-        // Get the GIF data from bundle
-        guard let gifURL = Bundle.main.url(forResource: "CuteDog", withExtension: "gif"),
-              let gifData = try? Data(contentsOf: gifURL) else {
+        // Get the GIF data from bundle - try Clippy first, fallback to CuteDog
+        var gifURL = Bundle.main.url(forResource: "Clippy", withExtension: "gif")
+        if gifURL == nil {
+            gifURL = Bundle.main.url(forResource: "CuteDog", withExtension: "gif")
+        }
+        
+        guard let url = gifURL,
+              let gifData = try? Data(contentsOf: url) else {
             print("⚠️ Could not load GIF data")
             return nil
         }
@@ -130,7 +143,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
         let frameCount = CGImageSourceGetCount(cgImageSource)
         var frames: [NSImage] = []
         
-        print("🎬 [DogLoadingView] Extracting \(frameCount) frames from GIF")
+        print("🎬 [ClippyLoadingView] Extracting \(frameCount) frames from GIF")
         
         for i in 0..<frameCount {
             guard let cgImage = CGImageSourceCreateImageAtIndex(cgImageSource, i, nil) else {
@@ -142,7 +155,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
             frames.append(nsImage)
         }
         
-        print("🎬 [DogLoadingView] Successfully extracted \(frames.count) frames")
+        print("🎬 [ClippyLoadingView] Successfully extracted \(frames.count) frames")
         return frames.isEmpty ? nil : frames
     }
     
@@ -197,9 +210,9 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
                 return
             }
             
-            print("🎬 [DogLoadingView] Starting animation with \(frames.count) frames")
-            print("🎬 [DogLoadingView] Intro: frames \(introStartFrame)-\(introEndFrame)")
-            print("🎬 [DogLoadingView] Loop: frames \(loopStartFrame)-\(loopEndFrame) (forward & reverse)")
+            print("🎬 [ClippyLoadingView] Starting animation with \(frames.count) frames")
+            print("🎬 [ClippyLoadingView] Intro: frames \(introStartFrame)-\(introEndFrame)")
+            print("🎬 [ClippyLoadingView] Loop: frames \(loopStartFrame)-\(loopEndFrame) (forward & reverse)")
             
             isPlayingIntro = true
             isPlayingReverse = false
@@ -207,7 +220,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
             
             // Start with appropriate FPS
             let frameRate = isProcessing ? processingFPS : normalFPS
-            print("🎬 [DogLoadingView] Animation speed: \(isProcessing ? "FAST (processing)" : "NORMAL")")
+            print("🎬 [ClippyLoadingView] Animation speed: \(isProcessing ? "FAST (processing)" : "NORMAL")")
             animationTimer = Timer.scheduledTimer(withTimeInterval: frameRate, repeats: true) { [weak self] _ in
                 self?.advanceFrame()
             }
@@ -222,7 +235,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
             // Restart timer with new speed
             stopAnimation()
             let frameRate = isProcessing ? processingFPS : normalFPS
-            print("🎬 [DogLoadingView] Animation speed changed to: \(isProcessing ? "FAST (processing)" : "NORMAL")")
+            print("🎬 [ClippyLoadingView] Animation speed changed to: \(isProcessing ? "FAST (processing)" : "NORMAL")")
             animationTimer = Timer.scheduledTimer(withTimeInterval: frameRate, repeats: true) { [weak self] _ in
                 self?.advanceFrame()
             }
@@ -245,7 +258,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
                 // Playing intro (frames 1-300 forward)
                 if currentFrame >= introEndFrame {
                     // Intro finished, switch to reverse
-                    print("🎬 [DogLoadingView] Intro complete, playing reverse")
+                    print("🎬 [ClippyLoadingView] Intro complete, playing reverse")
                     isPlayingIntro = false
                     isPlayingReverse = true
                     currentFrame = loopEndFrame
@@ -256,7 +269,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
                 // Playing reverse (frames 300-133 backward)
                 if currentFrame <= loopStartFrame {
                     // Reverse complete, switch to forward
-                    print("🎬 [DogLoadingView] Reverse complete, playing forward")
+                    print("🎬 [ClippyLoadingView] Reverse complete, playing forward")
                     isPlayingReverse = false
                     currentFrame = loopStartFrame
                 } else {
@@ -266,7 +279,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
                 // Playing forward loop (frames 133-300 forward)
                 if currentFrame >= loopEndFrame {
                     // Forward complete, switch to reverse
-                    print("🎬 [DogLoadingView] Forward complete, playing reverse")
+                    print("🎬 [ClippyLoadingView] Forward complete, playing reverse")
                     isPlayingReverse = true
                     currentFrame = loopEndFrame
                 } else {
@@ -291,12 +304,12 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
     }
     
     private func createFallbackView() -> NSView {
-        print("🐕 [DogLoadingView] Creating fallback view with dog emoji")
+        print("📎 [ClippyLoadingView] Creating fallback view with paperclip emoji")
         let fallbackView = NSView()
         fallbackView.wantsLayer = true
         fallbackView.layer?.backgroundColor = NSColor.clear.cgColor
         
-        let textField = NSTextField(labelWithString: "🐕")
+        let textField = NSTextField(labelWithString: "📎")
         textField.font = NSFont.systemFont(ofSize: 64)
         textField.alignment = .center
         textField.backgroundColor = .clear
@@ -308,7 +321,7 @@ private struct AnimatedDogPlayer: NSViewRepresentable {
             textField.centerYAnchor.constraint(equalTo: fallbackView.centerYAnchor)
         ])
         
-        print("🐕 [DogLoadingView] Fallback view created successfully")
+        print("📎 [ClippyLoadingView] Fallback view created successfully")
         return fallbackView
     }
 }
@@ -439,9 +452,9 @@ private struct CloudShape: Shape {
 
 #Preview {
     VStack(spacing: 40) {
-        DogLoadingView(isLoading: true, message: "Processing...")
+        ClippyLoadingView(isLoading: true, message: "Processing...")
         
-        DogLoadingView(isLoading: false, message: "Ready!")
+        ClippyLoadingView(isLoading: false, message: "Ready!")
         
         // Preview thinking cloud separately
         ThinkingCloud()
