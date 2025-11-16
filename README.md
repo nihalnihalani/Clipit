@@ -1,6 +1,8 @@
-# Clipit - Smart Clipboard Manager for Windows
+# ClipIt - Smart Clipboard Manager for Windows
 
-Clipit is an AI-powered clipboard manager for Windows that helps you organize, search, and intelligently retrieve your clipboard history using the LFM2-350M language model.
+ClipIt is an AI-powered clipboard manager for Windows that helps you organize, search, and intelligently retrieve your clipboard history using local AI models (Llama-3.2-1B).
+
+> **Note:** This is a Windows-only application migrated from the macOS app "PastePup". All Swift/macOS code has been removed.
 
 ## Features
 
@@ -25,11 +27,12 @@ Clipit is an AI-powered clipboard manager for Windows that helps you organize, s
 1. Download Tesseract from: https://github.com/UB-Mannheim/tesseract/wiki
 2. Install to default location or add to PATH
 
-### Install Clipit
+### Install ClipIt
 
 ```bash
 # Clone the repository
-cd clipit
+git clone <repository-url>
+cd PastePup
 
 # Install dependencies
 pip install -r requirements.txt
@@ -84,14 +87,17 @@ The application stores data in:
 ### Project Structure
 
 ```
-clipit/
-├── clipit/
+PastePup/
+├── clipit/                  # Main application package
 │   ├── main.py              # Application entry point
 │   ├── ui/                  # User interface components
 │   ├── services/            # Core services (clipboard, AI, OCR)
 │   ├── models/              # Database models
 │   └── utils/               # Utilities
-└── assets/                  # Images and resources
+├── requirements.txt         # Python dependencies
+├── test_clipit.py          # Test suite
+├── run.bat                 # Windows launcher script
+└── README.md               # This file
 ```
 
 ## Known Limitations
@@ -103,11 +109,16 @@ clipit/
 
 ## License
 
-This project is a Windows port of PastePup, migrated from Swift/macOS to Python/Windows.
+This project is ClipIt, a Windows-native clipboard manager. Originally migrated from the PastePup macOS application.
 
 ## Acknowledgments
 
-- Original PastePup application for macOS
-- Meta's LFM2-350M language model
+- Original PastePup concept (macOS/Swift - now removed)
+- Meta's Llama-3.2-1B language model
 - Tesseract OCR project
+- PyQt5 framework
+
+## Project History
+
+This repository originally contained PastePup (a macOS Swift app), but has been fully converted to ClipIt (Windows Python app). All macOS/Swift code has been removed to focus exclusively on the Windows implementation.
 
