@@ -1,15 +1,15 @@
-"""Floating dog widget for Windows"""
+"""Floating Clippy widget for Windows"""
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
 from PyQt5.QtCore import Qt, QTimer, QPoint
 from PyQt5.QtGui import QMovie, QFont
 
-class FloatingDogWidget(QWidget):
-    """Floating dog animation widget"""
+class FloatingClippyWidget(QWidget):
+    """Floating Clippy animation widget"""
     
     def __init__(self):
         super().__init__()
         self.is_visible = False
-        self.message = "Clipit is ready!"
+        self.message = "Clippy is ready to help!"
         self.is_loading = False
         
         self._init_ui()
@@ -48,11 +48,11 @@ class FloatingDogWidget(QWidget):
             }
         """)
         
-        # Create dog animation placeholder
-        self.dog_label = QLabel("🐕")
-        self.dog_label.setAlignment(Qt.AlignCenter)
-        self.dog_label.setFont(QFont("Arial", 48))
-        self.dog_label.setStyleSheet("""
+        # Create Clippy animation placeholder
+        self.clippy_label = QLabel("📎")
+        self.clippy_label.setAlignment(Qt.AlignCenter)
+        self.clippy_label.setFont(QFont("Arial", 48))
+        self.clippy_label.setStyleSheet("""
             QLabel {
                 background-color: rgba(255, 255, 255, 220);
                 border-radius: 50px;
@@ -61,7 +61,7 @@ class FloatingDogWidget(QWidget):
         """)
         
         # Add to layout
-        layout.addWidget(self.dog_label)
+        layout.addWidget(self.clippy_label)
         layout.addWidget(self.message_label)
         layout.addStretch()
         
@@ -77,14 +77,14 @@ class FloatingDogWidget(QWidget):
         # Will be handled at application level
         pass
     
-    def show_dog(self, message="Clipit is ready!", is_loading=False):
-        """Show the dog with a message
+    def show_clippy(self, message="Clippy is ready to help!", is_loading=False):
+        """Show Clippy with a message
         
         Args:
             message: Message to display
             is_loading: Whether to show loading animation
         """
-        print(f"🐕 Showing dog: {message}")
+        print(f"📎 Showing Clippy: {message}")
         
         self.message = message
         self.is_loading = is_loading
@@ -104,11 +104,11 @@ class FloatingDogWidget(QWidget):
             self.anim_timer.start(200)  # Update every 200ms
         else:
             self.anim_timer.stop()
-            self.dog_label.setText("🐕")
+            self.clippy_label.setText("📎")
     
-    def hide_dog(self):
-        """Hide the dog"""
-        print("🐕 Hiding dog")
+    def hide_clippy(self):
+        """Hide Clippy"""
+        print("📎 Hiding Clippy")
         self.hide()
         self.is_visible = False
         self.anim_timer.stop()
@@ -128,13 +128,13 @@ class FloatingDogWidget(QWidget):
             self.anim_timer.start(200)
         elif not is_loading:
             self.anim_timer.stop()
-            self.dog_label.setText("🐕")
+            self.clippy_label.setText("📎")
             
             # Auto-hide after 2 seconds when done
-            QTimer.singleShot(2000, self.hide_dog)
+            QTimer.singleShot(2000, self.hide_clippy)
     
     def _position_top_right(self):
-        """Position dog in top-right corner of screen"""
+        """Position Clippy in top-right corner of screen"""
         from PyQt5.QtWidgets import QApplication
         screen = QApplication.primaryScreen().geometry()
         
@@ -149,16 +149,16 @@ class FloatingDogWidget(QWidget):
         if not self.is_loading:
             return
         
-        # Simple animation using dog emoji rotation
-        dogs = ["🐕", "🐶", "🐕‍🦺", "🐩"]
-        self.dog_label.setText(dogs[self.anim_frame % len(dogs)])
+        # Simple animation using paperclip variations
+        clippys = ["📎", "🖇️", "📋", "📝"]
+        self.clippy_label.setText(clippys[self.anim_frame % len(clippys)])
         self.anim_frame += 1
     
     def keyPressEvent(self, event):
         """Handle key press events"""
         if event.key() == Qt.Key_Escape:
-            print("🐕 ESC pressed - hiding dog")
-            self.hide_dog()
+            print("📎 ESC pressed - hiding Clippy")
+            self.hide_clippy()
         else:
             super().keyPressEvent(event)
 

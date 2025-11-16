@@ -10,7 +10,7 @@ from clipit.services.hotkey_manager import HotkeyManager
 from clipit.services.text_capture import TextCaptureService
 from clipit.services.ocr_service import OCRService
 from clipit.ui.main_window import MainWindow
-from clipit.ui.floating_dog import FloatingDogWidget
+from clipit.ui.floating_clippy import FloatingClippyWidget
 from clipit.ui.suggestions import SuggestionsOverlay
 
 class ClipitApp:
@@ -38,7 +38,7 @@ class ClipitApp:
         
         # Initialize UI components
         self.main_window = MainWindow(self.clipboard_monitor, self.ai_service)
-        self.floating_dog = FloatingDogWidget()
+        self.floating_clippy = FloatingClippyWidget()
         self.suggestions_overlay = SuggestionsOverlay()
         
         # Connect signals
@@ -52,7 +52,7 @@ class ClipitApp:
         print("   Alt+X: Ask a question about clipboard history")
         print("   Alt+V: Extract text from screen (OCR)")
         print("   Alt+S: Show clipboard suggestions")
-        print("   ESC: Dismiss floating dog")
+        print("   ESC: Dismiss Clippy")
     
     def _connect_signals(self):
         """Connect signals between components"""
@@ -83,11 +83,11 @@ class ClipitApp:
             # Already capturing - stop and process
             print("   Stopping text capture...")
             self.text_capture.stop_capturing()
-            # Don't hide dog yet - processCapturedText will handle it
+            # Don't hide Clippy yet - processCapturedText will handle it
         else:
             # Start capturing
             print("   Starting text capture...")
-            self.floating_dog.show_dog("Clipit is listening...", is_loading=False)
+            self.floating_clippy.show_clippy("Clippy is listening...", is_loading=False)
             
             self.text_capture.start_capturing(self._process_captured_text)
     
@@ -96,7 +96,7 @@ class ClipitApp:
         print(f"\n🎯 Processing captured text: '{captured_text}'")
         
         # Show loading state
-        self.floating_dog.update_message("Clipit is thinking...", is_loading=True)
+        self.floating_clippy.update_message("Clippy is thinking...", is_loading=True)
         
         # Get recent clipboard items for context
         items = self.clipboard_monitor.get_recent_items(limit=10)
@@ -118,17 +118,17 @@ class ClipitApp:
             self.text_capture.replace_text_with_answer(answer)
             
             # Show success message
-            self.floating_dog.update_message("Answer ready! 🎉", is_loading=False)
+            self.floating_clippy.update_message("Answer ready! 🎉", is_loading=False)
         else:
             print("   ℹ️ No relevant answer generated")
-            self.floating_dog.update_message("No relevant answer found 📋", is_loading=False)
+            self.floating_clippy.update_message("No relevant answer found 📋", is_loading=False)
     
     def _on_vision_hotkey(self):
         """Handle Alt+V hotkey for OCR"""
         print("\n👁️ Vision/OCR hotkey triggered!")
         
         # Show loading
-        self.floating_dog.show_dog("Extracting text from screen...", is_loading=True)
+        self.floating_clippy.show_clippy("Extracting text from screen...", is_loading=True)
         
         # Parse screen with OCR
         text = self.ocr_service.parse_screen()
@@ -145,13 +145,13 @@ class ClipitApp:
             session.commit()
             
             # Show success
-            self.floating_dog.update_message(f"Extracted {len(text)} characters! ✨", is_loading=False)
+            self.floating_clippy.update_message(f"Extracted {len(text)} characters! ✨", is_loading=False)
             
             # Refresh history
             QTimer.singleShot(500, self.main_window.refresh_history)
         else:
             print("   ❌ OCR failed")
-            self.floating_dog.update_message("OCR failed 😞", is_loading=False)
+            self.floating_clippy.update_message("OCR failed 😞", is_loading=False)
     
     def _on_suggestions_hotkey(self):
         """Handle Alt+S hotkey for suggestions"""
@@ -165,7 +165,7 @@ class ClipitApp:
             self.suggestions_overlay.show_suggestions(items, "Recent clipboard items")
         else:
             print("   ⚠️ No clipboard items available")
-            self.floating_dog.show_dog("No clipboard history yet 📋", is_loading=False)
+            self.floating_clippy.show_clippy("No clipboard history yet 📋", is_loading=False)
     
     def _on_suggestion_selected(self, item):
         """Handle suggestion selection"""
@@ -180,7 +180,7 @@ class ClipitApp:
             win32clipboard.CloseClipboard()
             
             # Show success
-            self.floating_dog.show_dog("Copied to clipboard! ✨", is_loading=False)
+            self.floating_clippy.show_clippy("Copied to clipboard! ✨", is_loading=False)
         except Exception as e:
             print(f"❌ Failed to copy: {e}")
     
