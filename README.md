@@ -69,8 +69,11 @@ python -m clipit.main
 
 ## Architecture
 
+For detailed architecture diagrams and technical documentation, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+**Quick Overview:**
 - **UI**: PyQt5 for native Windows look and feel
-- **AI Model**: LFM2-350M via Hugging Face Transformers
+- **AI Model**: Llama-3.2-1B via Hugging Face Transformers
 - **Database**: SQLite with SQLAlchemy ORM
 - **Clipboard**: Windows API via pywin32
 - **Hotkeys**: Global keyboard hooks via pynput
