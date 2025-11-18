@@ -4,6 +4,16 @@ ClipIt is an AI-powered clipboard manager for Windows that helps you organize, s
 
 ## <img src="https://img.icons8.com/?size=48&id=VsEWqQrlt7v2&format=png" width="24" height="24" alt="video"/> Demo Videos
 
+### 📺 Watch on YouTube
+
+[![ClipIt Demo Video](https://img.youtube.com/vi/prX3y_jcd90/maxresdefault.jpg)](https://www.youtube.com/watch?v=prX3y_jcd90)
+
+**[▶️ Watch Full Demo on YouTube](https://www.youtube.com/watch?v=prX3y_jcd90)**
+
+See ClipIt in action with AI-powered clipboard management and smart text retrieval.
+
+---
+
 ### ClipIt: AI Memory For Your PC
 
 https://github.com/nihalnihalani/Clipit/raw/main/clipit/ClipIt__AI_Memory_For_Your_PC.mp4
