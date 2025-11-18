@@ -2,8 +2,6 @@
 
 ClipIt is an AI-powered clipboard manager for Windows that helps you organize, search, and intelligently retrieve your clipboard history using local AI models (Llama-3.2-1B).
 
-> **Note:** This is a Windows-only application migrated from the macOS app "PastePup". All Swift/macOS code has been removed.
-
 ## Demo Videos
 
 Watch ClipIt in action:
