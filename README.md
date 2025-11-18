@@ -1,8 +1,8 @@
-# ClipIt - Smart Clipboard Manager for Windows
+<img src="https://img.icons8.com/?size=48&id=11074&format=png" width="32" height="32" alt="video"/> ClipIt - Smart Clipboard Manager for Windows
 
 ClipIt is an AI-powered clipboard manager for Windows that helps you organize, search, and intelligently retrieve your clipboard history using local AI models (Llama-3.2-1B).
 
-## 🎬 Demo Videos
+## <img src="https://img.icons8.com/?size=48&id=VsEWqQrlt7v2&format=png" width="24" height="24" alt="video"/> Demo Videos
 
 ### ClipIt: AI Memory For Your PC
 
@@ -20,19 +20,19 @@ https://github.com/nihalnihalani/Clipit/raw/main/clipit/ClipIt__AI-Powered_Memor
 
 In-depth look at how ClipIt uses AI to understand and retrieve your clipboard history.
 
-## ✨ Features
+## <img src="https://img.icons8.com/?size=48&id=60003&format=png" width="24" height="24" alt="features"/> Features
 
 <table>
 <tr>
 <td>
 
-### 📋 Clipboard Monitoring
+### <img src="https://img.icons8.com/?size=48&id=79020&format=png" width="20" height="20" alt="clipboard"/> Clipboard Monitoring
 Automatically captures all text and images you copy
 
 </td>
 <td>
 
-### 🤖 AI-Powered Search
+### <img src="https://img.icons8.com/?size=48&id=37410&format=png" width="20" height="20" alt="ai"/> AI-Powered Search
 Ask questions about your clipboard history (Alt+X)
 
 </td>
@@ -40,13 +40,13 @@ Ask questions about your clipboard history (Alt+X)
 <tr>
 <td>
 
-### 🏷️ Smart Tagging
+### <img src="https://img.icons8.com/?size=48&id=59868&format=png" width="20" height="20" alt="tag"/> Smart Tagging
 Automatically organizes items with semantic tags
 
 </td>
 <td>
 
-### 👁️ OCR Support
+### <img src="https://img.icons8.com/?size=48&id=cEcenq1dEbND&format=png" width="20" height="20" alt="eye"/> OCR Support
 Extract text from screen with Alt+V
 
 </td>
@@ -54,13 +54,13 @@ Extract text from screen with Alt+V
 <tr>
 <td>
 
-### 🐕 Floating Assistant
+### <img src="https://img.icons8.com/?size=48&id=PGpXkTUdCHk8&format=png" width="20" height="20" alt="dog"/> Floating Assistant
 Visual feedback with cute dog animation
 
 </td>
 <td>
 
-### ⌨️ Global Hotkeys
+### <img src="https://img.icons8.com/?size=48&id=60677&format=png" width="20" height="20" alt="keyboard"/> Global Hotkeys
 Quick access from any application
 
 </td>
@@ -68,14 +68,14 @@ Quick access from any application
 <tr>
 <td colspan="2">
 
-### 💾 Persistent Storage
+### <img src="https://img.icons8.com/?size=48&id=11360&format=png" width="20" height="20" alt="database"/> Persistent Storage
 SQLite database keeps your history safe and searchable
 
 </td>
 </tr>
 </table>
 
-## 📥 Installation
+## <img src="https://img.icons8.com/?size=48&id=366&format=png" width="24" height="24" alt="download"/> Installation
 
 ### Prerequisites
 
@@ -102,7 +102,7 @@ pip install -r requirements.txt
 python -m clipit.main
 ```
 
-## 🎮 Usage
+## <img src="https://img.icons8.com/?size=48&id=cAi7tS2wPJ7v&format=png" width="24" height="24" alt="usage"/> Usage
 
 ### Keyboard Shortcuts
 
@@ -125,14 +125,12 @@ python -m clipit.main
 
 ### Example Questions
 
-```
-💡 "what was that email address?"
-💡 "tracking number"
-💡 "the code snippet from earlier"
-💡 "paste image 2" (pastes the 2nd most recent image)
-```
+- "what was that email address?"
+- "tracking number"
+- "the code snippet from earlier"
+- "paste image 2" (pastes the 2nd most recent image)
 
-## 🏗️ Architecture
+## <img src="https://img.icons8.com/?size=48&id=60641&format=png" width="24" height="24" alt="architecture"/> Architecture
 
 For detailed architecture diagrams and technical documentation, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
 
@@ -147,13 +145,13 @@ For detailed architecture diagrams and technical documentation, see **[ARCHITECT
 | **Hotkeys** | ![Keyboard](https://img.shields.io/badge/pynput-keyboard-green?style=flat-square) pynput |
 | **OCR** | ![Tesseract](https://img.shields.io/badge/Tesseract-OCR-blue?style=flat-square) pytesseract |
 
-## ⚙️ Configuration
+## <img src="https://img.icons8.com/?size=48&id=77240&format=png" width="24" height="24" alt="settings"/> Configuration
 
 The application stores data in:
 - **Database**: `%APPDATA%/Clipit/clipit.db`
 - **Images**: `%APPDATA%/Clipit/images/`
 
-## 💻 Development
+## <img src="https://img.icons8.com/?size=48&id=SBEjRDmczSCC&format=png" width="24" height="24" alt="development"/> Development
 
 ### Project Structure
 
@@ -172,41 +170,37 @@ Clipit/
 └── README.md               # This file
 ```
 
-## ⚠️ Known Limitations
+## <img src="https://img.icons8.com/?size=48&id=876&format=png" width="24" height="24" alt="warning"/> Known Limitations
 
 - Llama-3.2-1B is a relatively small model; complex queries may not work perfectly
 - Image analysis is limited (uses separate vision model if available)
 - OCR quality depends on screen content and Tesseract configuration
 - Antivirus software may flag keyboard hooks as suspicious
 
-## 🧪 Testing
+## <img src="https://img.icons8.com/?size=48&id=60710&format=png" width="24" height="24" alt="testing"/> Testing
 
 See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
 
-## 🔧 Troubleshooting
+## <img src="https://img.icons8.com/?size=48&id=24551&format=png" width="24" height="24" alt="troubleshooting"/> Troubleshooting
 
 See **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** for common issues and solutions.
 
-## 📄 License
+## <img src="https://img.icons8.com/?size=48&id=59777&format=png" width="24" height="24" alt="license"/> License
 
 This project is ClipIt, a Windows-native clipboard manager.
 
-## 🙏 Acknowledgments
+## <img src="https://img.icons8.com/?size=48&id=59800&format=png" width="24" height="24" alt="handshake"/> Acknowledgments
 
 - Original PastePup concept (macOS/Swift)
 - Meta's Llama-3.2-1B language model
 - Tesseract OCR project
 - PyQt5 framework
 
-## 📜 Project History
-
-This repository originally contained PastePup (a macOS Swift app), but has been fully converted to ClipIt (Windows Python app). All macOS/Swift code has been removed to focus exclusively on the Windows implementation.
-
-## 🤝 Contributing
+## <img src="https://img.icons8.com/?size=48&id=59800&format=png" width="24" height="24" alt="contributing"/> Contributing
 
 Contributions are welcome! Please feel free to submit issues or pull requests.
 
-## 💬 Support
+## <img src="https://img.icons8.com/?size=48&id=118377&format=png" width="24" height="24" alt="support"/> Support
 
 For support and questions:
 - ![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-181717?style=flat-square&logo=github) Open an issue on GitHub
@@ -217,7 +211,7 @@ For support and questions:
 
 <div align="center">
 
-**Made with ❤️ for productivity**
+**Made with care for productivity**
 
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white)
