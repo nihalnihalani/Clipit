@@ -4,15 +4,29 @@ ClipIt is an AI-powered clipboard manager for Windows that helps you organize, s
 
 > **Note:** This is a Windows-only application migrated from the macOS app "PastePup". All Swift/macOS code has been removed.
 
+## Demo Videos
+
+Watch ClipIt in action:
+
+### ClipIt: AI Memory For Your PC
+[Watch Video](clipit/ClipIt__AI_Memory_For_Your_PC.mp4)
+
+A quick demonstration of ClipIt's core features and AI-powered clipboard search.
+
+### ClipIt: AI-Powered Memory
+[Watch Video](clipit/ClipIt__AI-Powered_Memory.mp4)
+
+In-depth look at how ClipIt uses AI to understand and retrieve your clipboard history.
+
 ## Features
 
-- 📋 **Automatic Clipboard Monitoring**: Captures all text and images you copy
-- 🤖 **AI-Powered Answers**: Ask questions about your clipboard history (Alt+X)
-- 🏷️ **Smart Tagging**: Automatically tags clipboard items for better organization
-- 🔍 **OCR Support**: Extract text from screen with Alt+V
-- 🐕 **Floating Assistant**: Cute dog animation shows processing status
-- ⌨️ **Global Hotkeys**: Quick access from any application
-- 💾 **Persistent Storage**: SQLite database keeps your history safe
+- **Automatic Clipboard Monitoring**: Captures all text and images you copy
+- **AI-Powered Answers**: Ask questions about your clipboard history (Alt+X)
+- **Smart Tagging**: Automatically tags clipboard items for better organization
+- **OCR Support**: Extract text from screen with Alt+V
+- **Floating Assistant**: Cute dog animation shows processing status
+- **Global Hotkeys**: Quick access from any application
+- **Persistent Storage**: SQLite database keeps your history safe
 
 ## Installation
 
@@ -31,8 +45,8 @@ ClipIt is an AI-powered clipboard manager for Windows that helps you organize, s
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd PastePup
+git clone https://github.com/nihalnihalani/Clipit.git
+cd Clipit
 
 # Install dependencies
 pip install -r requirements.txt
@@ -90,7 +104,7 @@ The application stores data in:
 ### Project Structure
 
 ```
-PastePup/
+Clipit/
 ├── clipit/                  # Main application package
 │   ├── main.py              # Application entry point
 │   ├── ui/                  # User interface components
@@ -100,15 +114,24 @@ PastePup/
 ├── requirements.txt         # Python dependencies
 ├── test_clipit.py          # Test suite
 ├── run.bat                 # Windows launcher script
+├── ARCHITECTURE.md         # Architecture diagrams
 └── README.md               # This file
 ```
 
 ## Known Limitations
 
-- LFM2-350M is a relatively small model; complex queries may not work perfectly
+- Llama-3.2-1B is a relatively small model; complex queries may not work perfectly
 - Image analysis is limited (uses separate vision model if available)
 - OCR quality depends on screen content and Tesseract configuration
 - Antivirus software may flag keyboard hooks as suspicious
+
+## Testing
+
+See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
+
+## Troubleshooting
+
+See **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** for common issues and solutions.
 
 ## License
 
@@ -125,3 +148,13 @@ This project is ClipIt, a Windows-native clipboard manager. Originally migrated 
 
 This repository originally contained PastePup (a macOS Swift app), but has been fully converted to ClipIt (Windows Python app). All macOS/Swift code has been removed to focus exclusively on the Windows implementation.
 
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests.
+
+## Support
+
+For support and questions:
+- Open an issue on GitHub
+- Check the documentation in ARCHITECTURE.md
+- Review TROUBLESHOOTING.md for common problems

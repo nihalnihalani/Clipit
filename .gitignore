@@ -2,3 +2,9 @@
 .build
 DogBundle 2
 profile.txt
+.DS_Store
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
