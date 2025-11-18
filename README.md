@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📋 ClipIt
+# <img src="https://img.icons8.com/fluent/48/000000/clipboard-list.png" alt="Clipboard" width="40"/> ClipIt
 
 ### AI-Powered Clipboard Manager for Windows
 
@@ -28,9 +28,9 @@
 
 </div>
 
-## 🎥 Demo
+## <img src="https://img.icons8.com/fluent/32/000000/video.png" alt="Video"/> Demo
 
-### 📺 Watch on YouTube
+### <img src="https://img.icons8.com/color/24/000000/youtube-play.png" alt="YouTube"/> Watch on YouTube
 
 [![ClipIt Demo Video](https://img.youtube.com/vi/prX3y_jcd90/maxresdefault.jpg)](https://www.youtube.com/watch?v=prX3y_jcd90)
 
@@ -40,19 +40,19 @@ See ClipIt in action with AI-powered clipboard management and smart text retriev
 
 ---
 
-## ✨ Features
+## <img src="https://img.icons8.com/fluent/32/000000/stars.png" alt="Features"/> Features
 
 <table>
 <tr>
 <td width="50%">
 
-### 📋 **Clipboard Monitoring**
+### <img src="https://img.icons8.com/fluent/24/000000/copy.png" alt="Clipboard"/> **Clipboard Monitoring**
 Automatically captures all text and images you copy, creating a searchable history that never forgets.
 
 </td>
 <td width="50%">
 
-### 🤖 **AI-Powered Search**
+### <img src="https://img.icons8.com/fluent/24/000000/bot.png" alt="AI"/> **AI-Powered Search**
 Ask natural language questions about your clipboard history using local AI (Llama-3.2-1B). Press `Alt+X` to start!
 
 </td>
@@ -60,13 +60,13 @@ Ask natural language questions about your clipboard history using local AI (Llam
 <tr>
 <td width="50%">
 
-### 🏷️ **Smart Tagging**
+### <img src="https://img.icons8.com/fluent/24/000000/price-tag.png" alt="Tag"/> **Smart Tagging**
 Automatically organizes clipboard items with semantic tags for easy categorization and retrieval.
 
 </td>
 <td width="50%">
 
-### 👁️ **OCR Support**
+### <img src="https://img.icons8.com/fluent/24/000000/visible.png" alt="OCR"/> **OCR Support**
 Extract text from anywhere on your screen with `Alt+V` using powerful Tesseract OCR engine.
 
 </td>
@@ -74,13 +74,13 @@ Extract text from anywhere on your screen with `Alt+V` using powerful Tesseract 
 <tr>
 <td width="50%">
 
-### 🐕 **Floating Assistant**
+### <img src="https://img.icons8.com/fluent/24/000000/dog.png" alt="Dog"/> **Floating Assistant**
 Adorable dog animation provides visual feedback and makes clipboard management delightful.
 
 </td>
 <td width="50%">
 
-### ⌨️ **Global Hotkeys**
+### <img src="https://img.icons8.com/fluent/24/000000/keyboard.png" alt="Keyboard"/> **Global Hotkeys**
 Quick access from any application with customizable keyboard shortcuts.
 
 </td>
@@ -88,7 +88,7 @@ Quick access from any application with customizable keyboard shortcuts.
 <tr>
 <td colspan="2">
 
-### 💾 **Persistent Storage**
+### <img src="https://img.icons8.com/fluent/24/000000/database.png" alt="Database"/> **Persistent Storage**
 SQLite database keeps your clipboard history safe, searchable, and available even after restarts.
 
 </td>
@@ -97,7 +97,7 @@ SQLite database keeps your clipboard history safe, searchable, and available eve
 
 ---
 
-## 🚀 Installation
+## <img src="https://img.icons8.com/fluent/32/000000/rocket.png" alt="Installation"/> Installation
 
 ### Prerequisites
 
@@ -105,7 +105,7 @@ SQLite database keeps your clipboard history safe, searchable, and available eve
 <tr>
 <td>
 
-**Operating System**
+**<img src="https://img.icons8.com/fluent/20/000000/windows-10.png" alt="OS"/> Operating System**
 ```
 Windows 10 or Windows 11
 ```
@@ -113,7 +113,7 @@ Windows 10 or Windows 11
 </td>
 <td>
 
-**Python**
+**<img src="https://img.icons8.com/fluent/20/000000/python.png" alt="Python"/> Python**
 ```
 Python 3.8 or higher
 ```
@@ -121,7 +121,7 @@ Python 3.8 or higher
 </td>
 <td>
 
-**Tesseract OCR**
+**<img src="https://img.icons8.com/fluent/20/000000/image-file.png" alt="OCR"/> Tesseract OCR**
 ```
 For screen text extraction
 ```
@@ -155,46 +155,31 @@ Double-click `run.bat` to launch ClipIt with a single click!
 
 ---
 
-## 💡 Usage
+## <img src="https://img.icons8.com/fluent/32/000000/idea.png" alt="Usage"/> Usage
 
-### ⌨️ Keyboard Shortcuts
+### <img src="https://img.icons8.com/fluent/24/000000/keyboard.png" alt="Shortcuts"/> Keyboard Shortcuts
 
 <div align="center">
 
 | Shortcut | Action | Description |
 |:--------:|:-------|:------------|
-| `Alt+X` | **Ask AI** | Press once to start typing your question, press again to get an AI-generated answer |
-| `Alt+V` | **OCR Capture** | Extract text from current screen using OCR technology |
-| `Alt+S` | **Show Suggestions** | Display clipboard suggestions based on context |
-| `ESC` | **Dismiss** | Hide the floating dog assistant |
+| `Alt+X` | **<img src="https://img.icons8.com/fluent/16/000000/bot.png" alt="AI"/> Ask AI** | Press once to start typing your question, press again to get an AI-generated answer |
+| `Alt+V` | **<img src="https://img.icons8.com/fluent/16/000000/image-capture.png" alt="OCR"/> OCR Capture** | Extract text from current screen using OCR technology |
+| `Alt+S` | **<img src="https://img.icons8.com/fluent/16/000000/list.png" alt="Suggestions"/> Show Suggestions** | Display clipboard suggestions based on context |
+| `ESC` | **<img src="https://img.icons8.com/fluent/16/000000/cancel.png" alt="Dismiss"/> Dismiss** | Hide the floating dog assistant |
 
 </div>
 
-### 🔄 AI Search Workflow
-
-<div align="center">
-
-```mermaid
-graph LR
-    A[Press Alt+X] --> B[Floating Dog Appears]
-    B --> C[Type Your Question]
-    C --> D[Press Alt+X Again]
-    D --> E[AI Searches History]
-    E --> F[Answer Appears]
-    style A fill:#4CAF50
-    style F fill:#2196F3
-```
-
-</div>
+### <img src="https://img.icons8.com/fluent/24/000000/process.png" alt="Workflow"/> AI Search Workflow
 
 **Example Flow:**
-1. 📝 **Press `Alt+X`** - Floating dog appears with "Clipit is listening..."
-2. ⌨️ **Type your question** - e.g., "what was that tracking number?"
-3. 📝 **Press `Alt+X` again** - To stop and process
-4. 🤖 **AI searches** - ClipIt searches your clipboard history
-5. ✨ **Answer appears** - The answer replaces your question automatically
+1. <img src="https://img.icons8.com/fluent/16/000000/keyboard.png" alt="Press"/> **Press `Alt+X`** - Floating dog appears with "Clipit is listening..."
+2. <img src="https://img.icons8.com/fluent/16/000000/edit.png" alt="Type"/> **Type your question** - e.g., "what was that tracking number?"
+3. <img src="https://img.icons8.com/fluent/16/000000/keyboard.png" alt="Press"/> **Press `Alt+X` again** - To stop and process
+4. <img src="https://img.icons8.com/fluent/16/000000/bot.png" alt="AI"/> **AI searches** - ClipIt searches your clipboard history
+5. <img src="https://img.icons8.com/fluent/16/000000/ok.png" alt="Done"/> **Answer appears** - The answer replaces your question automatically
 
-### 💬 Example Questions
+### <img src="https://img.icons8.com/fluent/24/000000/chat.png" alt="Examples"/> Example Questions
 
 ```
 💡 "what was that email address?"
@@ -207,24 +192,24 @@ graph LR
 
 ---
 
-## 🏗️ Architecture
+## <img src="https://img.icons8.com/fluent/32/000000/building.png" alt="Architecture"/> Architecture
 
-### Tech Stack
+### <img src="https://img.icons8.com/fluent/24/000000/toolbox.png" alt="Tech Stack"/> Tech Stack
 
 <div align="center">
 
 | Layer | Technology | Purpose |
 |:------|:-----------|:--------|
-| 🎨 **UI Framework** | PyQt5 | Modern, responsive user interface |
-| 🤖 **AI Model** | Llama-3.2-1B via Hugging Face | Local AI inference for privacy |
-| 💾 **Database** | SQLite + SQLAlchemy ORM | Efficient data storage and retrieval |
-| 📋 **Clipboard API** | pywin32 | Windows clipboard integration |
-| ⌨️ **Hotkey System** | pynput | Global keyboard shortcuts |
-| 👁️ **OCR Engine** | Tesseract via pytesseract | Text extraction from images |
+| **<img src="https://img.icons8.com/fluent/16/000000/design.png" alt="UI"/> UI Framework** | <img src="https://img.shields.io/badge/PyQt5-41CD52?style=flat-square&logo=qt&logoColor=white" alt="PyQt5"/> | Modern, responsive user interface |
+| **<img src="https://img.icons8.com/fluent/16/000000/bot.png" alt="AI"/> AI Model** | <img src="https://img.shields.io/badge/Llama--3.2--1B-0467DF?style=flat-square&logo=meta&logoColor=white" alt="Llama"/> | Local AI inference for privacy |
+| **<img src="https://img.icons8.com/fluent/16/000000/database.png" alt="DB"/> Database** | <img src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite"/> | Efficient data storage and retrieval |
+| **<img src="https://img.icons8.com/fluent/16/000000/copy.png" alt="Clipboard"/> Clipboard API** | <img src="https://img.shields.io/badge/Windows_API-0078D6?style=flat-square&logo=windows&logoColor=white" alt="Windows API"/> | Windows clipboard integration |
+| **<img src="https://img.icons8.com/fluent/16/000000/keyboard.png" alt="Hotkeys"/> Hotkey System** | <img src="https://img.shields.io/badge/pynput-keyboard-green?style=flat-square" alt="Pynput"/> | Global keyboard shortcuts |
+| **<img src="https://img.icons8.com/fluent/16/000000/visible.png" alt="OCR"/> OCR Engine** | <img src="https://img.shields.io/badge/Tesseract-OCR-blue?style=flat-square" alt="Tesseract"/> | Text extraction from images |
 
 </div>
 
-### 📂 Project Structure
+### <img src="https://img.icons8.com/fluent/24/000000/folder-tree.png" alt="Structure"/> Project Structure
 
 ```
 Clipit/
@@ -253,11 +238,11 @@ Clipit/
 └── 🔧 TROUBLESHOOTING.md      # Common issues & solutions
 ```
 
-For detailed architecture diagrams and technical documentation, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+For detailed architecture diagrams and technical documentation, see **[<img src="https://img.icons8.com/fluent/16/000000/document.png" alt="Docs"/> ARCHITECTURE.md](ARCHITECTURE.md)**.
 
 ---
 
-## ⚙️ Configuration
+## <img src="https://img.icons8.com/fluent/32/000000/settings.png" alt="Configuration"/> Configuration
 
 ClipIt stores data in your Windows AppData folder:
 
@@ -269,7 +254,7 @@ ClipIt stores data in your Windows AppData folder:
 
 ---
 
-## 🧪 Testing
+## <img src="https://img.icons8.com/fluent/32/000000/test-tube.png" alt="Testing"/> Testing
 
 ClipIt includes a comprehensive test suite to ensure reliability.
 
@@ -278,17 +263,17 @@ ClipIt includes a comprehensive test suite to ensure reliability.
 python test_clipit.py
 ```
 
-See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
+See **[<img src="https://img.icons8.com/fluent/16/000000/test-tube.png" alt="Testing"/> TESTING.md](TESTING.md)** for comprehensive testing procedures.
 
 ---
 
-## ⚠️ Known Limitations
+## <img src="https://img.icons8.com/fluent/32/000000/error.png" alt="Warning"/> Known Limitations
 
 <table>
 <tr>
 <td width="50%">
 
-**🤖 AI Model Size**
+**<img src="https://img.icons8.com/fluent/20/000000/bot.png" alt="AI"/> AI Model Size**
 - Llama-3.2-1B is relatively small
 - Complex queries may not work perfectly
 - Trade-off for fast local inference
@@ -296,7 +281,7 @@ See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
 </td>
 <td width="50%">
 
-**🖼️ Image Analysis**
+**<img src="https://img.icons8.com/fluent/20/000000/image.png" alt="Image"/> Image Analysis**
 - Limited image understanding
 - Uses separate vision model if available
 - Primarily focused on text content
@@ -306,7 +291,7 @@ See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
 <tr>
 <td width="50%">
 
-**👁️ OCR Quality**
+**<img src="https://img.icons8.com/fluent/20/000000/visible.png" alt="OCR"/> OCR Quality**
 - Depends on screen content clarity
 - Affected by font sizes and styles
 - Tesseract configuration matters
@@ -314,7 +299,7 @@ See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
 </td>
 <td width="50%">
 
-**🛡️ Antivirus Software**
+**<img src="https://img.icons8.com/fluent/20/000000/security-checked.png" alt="Security"/> Antivirus Software**
 - May flag keyboard hooks
 - False positive detection possible
 - Add exception if needed
@@ -325,11 +310,11 @@ See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
 
 ---
 
-## 🐛 Troubleshooting
+## <img src="https://img.icons8.com/fluent/32/000000/bug.png" alt="Bug"/> Troubleshooting
 
 Having issues? Check out our comprehensive troubleshooting guide:
 
-**[📖 TROUBLESHOOTING.md](TROUBLESHOOTING.md)**
+**[<img src="https://img.icons8.com/fluent/20/000000/wrench.png" alt="Fix"/> TROUBLESHOOTING.md](TROUBLESHOOTING.md)**
 
 Common issues include:
 - Tesseract OCR not found
@@ -339,7 +324,7 @@ Common issues include:
 
 ---
 
-## 🤝 Contributing
+## <img src="https://img.icons8.com/fluent/32/000000/handshake.png" alt="Contributing"/> Contributing
 
 Contributions are welcome! We'd love your help to make ClipIt even better.
 
@@ -347,7 +332,7 @@ Contributions are welcome! We'd love your help to make ClipIt even better.
 
 **Ways to Contribute:**
 
-| 🐛 Report Bugs | ✨ Request Features | 🔧 Submit PRs | 📖 Improve Docs |
+| <img src="https://img.icons8.com/fluent/24/000000/bug.png" alt="Bug"/> Report Bugs | <img src="https://img.icons8.com/fluent/24/000000/stars.png" alt="Feature"/> Request Features | <img src="https://img.icons8.com/fluent/24/000000/code.png" alt="PR"/> Submit PRs | <img src="https://img.icons8.com/fluent/24/000000/book.png" alt="Docs"/> Improve Docs |
 |:-------------:|:------------------:|:------------:|:--------------:|
 | [Open Issue](https://github.com/nihalnihalani/Clipit/issues) | [Feature Request](https://github.com/nihalnihalani/Clipit/issues) | [Pull Request](https://github.com/nihalnihalani/Clipit/pulls) | [Edit Docs](https://github.com/nihalnihalani/Clipit) |
 
@@ -355,13 +340,13 @@ Contributions are welcome! We'd love your help to make ClipIt even better.
 
 ---
 
-## 📄 License
+## <img src="https://img.icons8.com/fluent/32/000000/certificate.png" alt="License"/> License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## <img src="https://img.icons8.com/fluent/32/000000/thank-you.png" alt="Thanks"/> Acknowledgments
 
 ClipIt wouldn't be possible without these amazing projects:
 
@@ -369,22 +354,22 @@ ClipIt wouldn't be possible without these amazing projects:
 
 | Project | Purpose |
 |:--------|:--------|
-| 🦙 **[Meta Llama-3.2](https://huggingface.co/meta-llama)** | Local AI language model |
-| 👁️ **[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)** | Optical character recognition |
-| 🎨 **[PyQt5](https://www.riverbankcomputing.com/software/pyqt/)** | Cross-platform GUI framework |
-| 🐕 **[PastePup](https://github.com/josh-works/pastepup)** | Original macOS/Swift inspiration |
+| <img src="https://img.icons8.com/fluent/20/000000/bot.png" alt="Llama"/> **[Meta Llama-3.2](https://huggingface.co/meta-llama)** | Local AI language model |
+| <img src="https://img.icons8.com/fluent/20/000000/visible.png" alt="OCR"/> **[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)** | Optical character recognition |
+| <img src="https://img.icons8.com/fluent/20/000000/design.png" alt="PyQt"/> **[PyQt5](https://www.riverbankcomputing.com/software/pyqt/)** | Cross-platform GUI framework |
+| <img src="https://img.icons8.com/fluent/20/000000/dog.png" alt="Dog"/> **[PastePup](https://github.com/josh-works/pastepup)** | Original macOS/Swift inspiration |
 
 </div>
 
 ---
 
-## 💬 Support
+## <img src="https://img.icons8.com/fluent/32/000000/help.png" alt="Support"/> Support
 
 Need help? We're here for you!
 
 <div align="center">
 
-| 📝 Documentation | 🐛 Issues | 💬 Discussions |
+| <img src="https://img.icons8.com/fluent/24/000000/book.png" alt="Docs"/> Documentation | <img src="https://img.icons8.com/fluent/24/000000/github.png" alt="Issues"/> Issues | <img src="https://img.icons8.com/fluent/24/000000/chat.png" alt="Discussions"/> Discussions |
 |:----------------|:---------|:--------------|
 | [ARCHITECTURE.md](ARCHITECTURE.md) | [GitHub Issues](https://github.com/nihalnihalani/Clipit/issues) | [GitHub Discussions](https://github.com/nihalnihalani/Clipit/discussions) |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Report bugs & problems | Ask questions & share ideas |
@@ -396,7 +381,7 @@ Need help? We're here for you!
 
 <div align="center">
 
-## ⭐ Star History
+## <img src="https://img.icons8.com/fluent/32/000000/star.png" alt="Star"/> Star History
 
 If you find ClipIt useful, please consider giving it a star!
 
@@ -404,7 +389,7 @@ If you find ClipIt useful, please consider giving it a star!
 
 ---
 
-### 💖 Made with care for productivity enthusiasts
+### <img src="https://img.icons8.com/fluent/24/000000/love-circled.png" alt="Love"/> Made with care for productivity enthusiasts
 
 <p>
   <img src="https://img.shields.io/badge/Made_with-❤️-red?style=for-the-badge" alt="Made with Love">
