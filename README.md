@@ -1,8 +1,34 @@
-<img src="https://img.icons8.com/?size=48&id=11074&format=png" width="32" height="32" alt="video"/> ClipIt - Smart Clipboard Manager for Windows
+<div align="center">
 
-ClipIt is an AI-powered clipboard manager for Windows that helps you organize, search, and intelligently retrieve your clipboard history using local AI models (Llama-3.2-1B).
+# 📋 ClipIt
 
-## <img src="https://img.icons8.com/?size=48&id=VsEWqQrlt7v2&format=png" width="24" height="24" alt="video"/> Demo Videos
+### AI-Powered Clipboard Manager for Windows
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows">
+  <img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/AI-Powered-FF6B6B?style=for-the-badge&logo=openai&logoColor=white" alt="AI Powered">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+</p>
+
+<p align="center">
+  <strong>Never lose your clipboard history again. Search it with AI.</strong>
+</p>
+
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-demo">Demo</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#-usage">Usage</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-support">Support</a>
+</p>
+
+---
+
+</div>
+
+## 🎥 Demo
 
 ### 📺 Watch on YouTube
 
@@ -14,91 +40,102 @@ See ClipIt in action with AI-powered clipboard management and smart text retriev
 
 ---
 
-### ClipIt: AI Memory For Your PC
-
-https://github.com/nihalnihalani/Clipit/raw/main/clipit/ClipIt__AI_Memory_For_Your_PC.mp4
-
-<video src="https://github.com/nihalnihalani/Clipit/raw/main/clipit/ClipIt__AI_Memory_For_Your_PC.mp4" controls width="100%"></video>
-
-A quick demonstration of ClipIt's core features and AI-powered clipboard search.
-
-### ClipIt: AI-Powered Memory
-
-https://github.com/nihalnihalani/Clipit/raw/main/clipit/ClipIt__AI-Powered_Memory.mp4
-
-<video src="https://github.com/nihalnihalani/Clipit/raw/main/clipit/ClipIt__AI-Powered_Memory.mp4" controls width="100%"></video>
-
-In-depth look at how ClipIt uses AI to understand and retrieve your clipboard history.
-
-## <img src="https://img.icons8.com/?size=48&id=60003&format=png" width="24" height="24" alt="features"/> Features
+## ✨ Features
 
 <table>
 <tr>
-<td>
+<td width="50%">
 
-### <img src="https://img.icons8.com/?size=48&id=79020&format=png" width="20" height="20" alt="clipboard"/> Clipboard Monitoring
-Automatically captures all text and images you copy
-
-</td>
-<td>
-
-### <img src="https://img.icons8.com/?size=48&id=37410&format=png" width="20" height="20" alt="ai"/> AI-Powered Search
-Ask questions about your clipboard history (Alt+X)
+### 📋 **Clipboard Monitoring**
+Automatically captures all text and images you copy, creating a searchable history that never forgets.
 
 </td>
-</tr>
-<tr>
-<td>
+<td width="50%">
 
-### <img src="https://img.icons8.com/?size=48&id=59868&format=png" width="20" height="20" alt="tag"/> Smart Tagging
-Automatically organizes items with semantic tags
-
-</td>
-<td>
-
-### <img src="https://img.icons8.com/?size=48&id=cEcenq1dEbND&format=png" width="20" height="20" alt="eye"/> OCR Support
-Extract text from screen with Alt+V
+### 🤖 **AI-Powered Search**
+Ask natural language questions about your clipboard history using local AI (Llama-3.2-1B). Press `Alt+X` to start!
 
 </td>
 </tr>
 <tr>
-<td>
+<td width="50%">
 
-### <img src="https://img.icons8.com/?size=48&id=PGpXkTUdCHk8&format=png" width="20" height="20" alt="dog"/> Floating Assistant
-Visual feedback with cute dog animation
+### 🏷️ **Smart Tagging**
+Automatically organizes clipboard items with semantic tags for easy categorization and retrieval.
 
 </td>
-<td>
+<td width="50%">
 
-### <img src="https://img.icons8.com/?size=48&id=60677&format=png" width="20" height="20" alt="keyboard"/> Global Hotkeys
-Quick access from any application
+### 👁️ **OCR Support**
+Extract text from anywhere on your screen with `Alt+V` using powerful Tesseract OCR engine.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🐕 **Floating Assistant**
+Adorable dog animation provides visual feedback and makes clipboard management delightful.
+
+</td>
+<td width="50%">
+
+### ⌨️ **Global Hotkeys**
+Quick access from any application with customizable keyboard shortcuts.
 
 </td>
 </tr>
 <tr>
 <td colspan="2">
 
-### <img src="https://img.icons8.com/?size=48&id=11360&format=png" width="20" height="20" alt="database"/> Persistent Storage
-SQLite database keeps your history safe and searchable
+### 💾 **Persistent Storage**
+SQLite database keeps your clipboard history safe, searchable, and available even after restarts.
 
 </td>
 </tr>
 </table>
 
-## <img src="https://img.icons8.com/?size=48&id=366&format=png" width="24" height="24" alt="download"/> Installation
+---
+
+## 🚀 Installation
 
 ### Prerequisites
 
-- ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?style=flat-square&logo=windows&logoColor=white) Windows 10 or Windows 11
-- ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white) Python 3.8 or higher
-- ![Tesseract](https://img.shields.io/badge/Tesseract-OCR-blue?style=flat-square) Tesseract OCR (for screen text extraction)
+<table>
+<tr>
+<td>
 
-### Install Tesseract OCR
+**Operating System**
+```
+Windows 10 or Windows 11
+```
 
-1. Download Tesseract from: https://github.com/UB-Mannheim/tesseract/wiki
+</td>
+<td>
+
+**Python**
+```
+Python 3.8 or higher
+```
+
+</td>
+<td>
+
+**Tesseract OCR**
+```
+For screen text extraction
+```
+
+</td>
+</tr>
+</table>
+
+### Step 1: Install Tesseract OCR
+
+1. Download Tesseract from: [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki)
 2. Install to default location or add to PATH
 
-### Install ClipIt
+### Step 2: Install ClipIt
 
 ```bash
 # Clone the repository
@@ -112,119 +149,269 @@ pip install -r requirements.txt
 python -m clipit.main
 ```
 
-## <img src="https://img.icons8.com/?size=48&id=cAi7tS2wPJ7v&format=png" width="24" height="24" alt="usage"/> Usage
+### Quick Start (Windows)
 
-### Keyboard Shortcuts
+Double-click `run.bat` to launch ClipIt with a single click!
 
-| Shortcut | Action |
-|----------|--------|
-| **Alt+X** | Ask a question about your clipboard history |
-| | • Press once to start typing your question |
-| | • Press again to get an AI-generated answer |
-| **Alt+V** | Extract text from current screen using OCR |
-| **Alt+S** | Show clipboard suggestions |
-| **ESC** | Dismiss the floating dog |
+---
 
-### Text Capture Flow
+## 💡 Usage
 
-1. Press **Alt+X** - Floating dog appears with "Clipit is listening..."
-2. Type your question (e.g., "what was that tracking number?")
-3. Press **Alt+X** again to stop and process
-4. Clipit searches your clipboard history and generates an answer
-5. The answer replaces your typed question automatically
+### ⌨️ Keyboard Shortcuts
 
-### Example Questions
+<div align="center">
 
-- "what was that email address?"
-- "tracking number"
-- "the code snippet from earlier"
-- "paste image 2" (pastes the 2nd most recent image)
+| Shortcut | Action | Description |
+|:--------:|:-------|:------------|
+| `Alt+X` | **Ask AI** | Press once to start typing your question, press again to get an AI-generated answer |
+| `Alt+V` | **OCR Capture** | Extract text from current screen using OCR technology |
+| `Alt+S` | **Show Suggestions** | Display clipboard suggestions based on context |
+| `ESC` | **Dismiss** | Hide the floating dog assistant |
 
-## <img src="https://img.icons8.com/?size=48&id=60641&format=png" width="24" height="24" alt="architecture"/> Architecture
+</div>
 
-For detailed architecture diagrams and technical documentation, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+### 🔄 AI Search Workflow
+
+<div align="center">
+
+```mermaid
+graph LR
+    A[Press Alt+X] --> B[Floating Dog Appears]
+    B --> C[Type Your Question]
+    C --> D[Press Alt+X Again]
+    D --> E[AI Searches History]
+    E --> F[Answer Appears]
+    style A fill:#4CAF50
+    style F fill:#2196F3
+```
+
+</div>
+
+**Example Flow:**
+1. 📝 **Press `Alt+X`** - Floating dog appears with "Clipit is listening..."
+2. ⌨️ **Type your question** - e.g., "what was that tracking number?"
+3. 📝 **Press `Alt+X` again** - To stop and process
+4. 🤖 **AI searches** - ClipIt searches your clipboard history
+5. ✨ **Answer appears** - The answer replaces your question automatically
+
+### 💬 Example Questions
+
+```
+💡 "what was that email address?"
+💡 "tracking number"
+💡 "the code snippet from earlier"
+💡 "paste image 2" (pastes the 2nd most recent image)
+💡 "show me the link I copied yesterday"
+💡 "find that API key"
+```
+
+---
+
+## 🏗️ Architecture
 
 ### Tech Stack
 
-| Component | Technology |
-|-----------|-----------|
-| **UI** | ![PyQt5](https://img.shields.io/badge/PyQt5-41CD52?style=flat-square&logo=qt&logoColor=white) PyQt5 |
-| **AI Model** | ![Llama](https://img.shields.io/badge/Llama--3.2--1B-0467DF?style=flat-square&logo=meta&logoColor=white) Llama-3.2-1B via Hugging Face |
-| **Database** | ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white) SQLite with SQLAlchemy ORM |
-| **Clipboard** | ![Windows API](https://img.shields.io/badge/Windows_API-0078D6?style=flat-square&logo=windows&logoColor=white) pywin32 |
-| **Hotkeys** | ![Keyboard](https://img.shields.io/badge/pynput-keyboard-green?style=flat-square) pynput |
-| **OCR** | ![Tesseract](https://img.shields.io/badge/Tesseract-OCR-blue?style=flat-square) pytesseract |
+<div align="center">
 
-## <img src="https://img.icons8.com/?size=48&id=77240&format=png" width="24" height="24" alt="settings"/> Configuration
+| Layer | Technology | Purpose |
+|:------|:-----------|:--------|
+| 🎨 **UI Framework** | PyQt5 | Modern, responsive user interface |
+| 🤖 **AI Model** | Llama-3.2-1B via Hugging Face | Local AI inference for privacy |
+| 💾 **Database** | SQLite + SQLAlchemy ORM | Efficient data storage and retrieval |
+| 📋 **Clipboard API** | pywin32 | Windows clipboard integration |
+| ⌨️ **Hotkey System** | pynput | Global keyboard shortcuts |
+| 👁️ **OCR Engine** | Tesseract via pytesseract | Text extraction from images |
 
-The application stores data in:
-- **Database**: `%APPDATA%/Clipit/clipit.db`
-- **Images**: `%APPDATA%/Clipit/images/`
+</div>
 
-## <img src="https://img.icons8.com/?size=48&id=SBEjRDmczSCC&format=png" width="24" height="24" alt="development"/> Development
-
-### Project Structure
+### 📂 Project Structure
 
 ```
 Clipit/
-├── clipit/                  # Main application package
-│   ├── main.py              # Application entry point
-│   ├── ui/                  # User interface components
-│   ├── services/            # Core services (clipboard, AI, OCR)
-│   ├── models/              # Database models
-│   └── utils/               # Utilities
-├── requirements.txt         # Python dependencies
-├── test_clipit.py          # Test suite
-├── run.bat                 # Windows launcher script
-├── ARCHITECTURE.md         # Architecture diagrams
-└── README.md               # This file
+├── 📦 clipit/                  # Main application package
+│   ├── 🚀 main.py              # Application entry point
+│   ├── 🎨 ui/                  # User interface components
+│   │   ├── floating_clippy.py  # Clippy assistant
+│   │   ├── floating_dog.py     # Dog animation
+│   │   ├── main_window.py      # Main application window
+│   │   └── suggestions.py      # Suggestion system
+│   ├── ⚙️ services/            # Core services
+│   │   ├── ai_service.py       # AI integration
+│   │   ├── clipboard_monitor.py # Clipboard tracking
+│   │   ├── hotkey_manager.py   # Keyboard shortcuts
+│   │   ├── ocr_service.py      # OCR functionality
+│   │   └── text_capture.py     # Text capture system
+│   ├── 💾 models/              # Database models
+│   │   ├── database.py         # Database connection
+│   │   └── item.py             # Data models
+│   └── 🔧 utils/               # Utilities
+├── 📋 requirements.txt         # Python dependencies
+├── 🧪 test_clipit.py          # Test suite
+├── 🪟 run.bat                 # Windows launcher
+├── 📚 ARCHITECTURE.md         # Detailed architecture docs
+├── 📖 README.md               # This file
+└── 🔧 TROUBLESHOOTING.md      # Common issues & solutions
 ```
 
-## <img src="https://img.icons8.com/?size=48&id=876&format=png" width="24" height="24" alt="warning"/> Known Limitations
+For detailed architecture diagrams and technical documentation, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
 
-- Llama-3.2-1B is a relatively small model; complex queries may not work perfectly
-- Image analysis is limited (uses separate vision model if available)
-- OCR quality depends on screen content and Tesseract configuration
-- Antivirus software may flag keyboard hooks as suspicious
+---
 
-## <img src="https://img.icons8.com/?size=48&id=60710&format=png" width="24" height="24" alt="testing"/> Testing
+## ⚙️ Configuration
+
+ClipIt stores data in your Windows AppData folder:
+
+```
+%APPDATA%/Clipit/
+├── clipit.db           # SQLite database
+└── images/             # Copied images
+```
+
+---
+
+## 🧪 Testing
+
+ClipIt includes a comprehensive test suite to ensure reliability.
+
+```bash
+# Run all tests
+python test_clipit.py
+```
 
 See **[TESTING.md](TESTING.md)** for comprehensive testing procedures.
 
-## <img src="https://img.icons8.com/?size=48&id=24551&format=png" width="24" height="24" alt="troubleshooting"/> Troubleshooting
+---
 
-See **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** for common issues and solutions.
+## ⚠️ Known Limitations
 
-## <img src="https://img.icons8.com/?size=48&id=59777&format=png" width="24" height="24" alt="license"/> License
+<table>
+<tr>
+<td width="50%">
 
-This project is ClipIt, a Windows-native clipboard manager.
+**🤖 AI Model Size**
+- Llama-3.2-1B is relatively small
+- Complex queries may not work perfectly
+- Trade-off for fast local inference
 
-## <img src="https://img.icons8.com/?size=48&id=59800&format=png" width="24" height="24" alt="handshake"/> Acknowledgments
+</td>
+<td width="50%">
 
-- Original PastePup concept (macOS/Swift)
-- Meta's Llama-3.2-1B language model
-- Tesseract OCR project
-- PyQt5 framework
+**🖼️ Image Analysis**
+- Limited image understanding
+- Uses separate vision model if available
+- Primarily focused on text content
 
-## <img src="https://img.icons8.com/?size=48&id=59800&format=png" width="24" height="24" alt="contributing"/> Contributing
+</td>
+</tr>
+<tr>
+<td width="50%">
 
-Contributions are welcome! Please feel free to submit issues or pull requests.
+**👁️ OCR Quality**
+- Depends on screen content clarity
+- Affected by font sizes and styles
+- Tesseract configuration matters
 
-## <img src="https://img.icons8.com/?size=48&id=118377&format=png" width="24" height="24" alt="support"/> Support
+</td>
+<td width="50%">
 
-For support and questions:
-- ![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-181717?style=flat-square&logo=github) Open an issue on GitHub
-- ![Documentation](https://img.shields.io/badge/Docs-ARCHITECTURE.md-blue?style=flat-square) Check the documentation in ARCHITECTURE.md
-- ![Troubleshooting](https://img.shields.io/badge/Help-TROUBLESHOOTING.md-orange?style=flat-square) Review TROUBLESHOOTING.md for common problems
+**🛡️ Antivirus Software**
+- May flag keyboard hooks
+- False positive detection possible
+- Add exception if needed
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🐛 Troubleshooting
+
+Having issues? Check out our comprehensive troubleshooting guide:
+
+**[📖 TROUBLESHOOTING.md](TROUBLESHOOTING.md)**
+
+Common issues include:
+- Tesseract OCR not found
+- Keyboard shortcuts not working
+- AI model loading errors
+- Antivirus blocking hotkeys
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! We'd love your help to make ClipIt even better.
+
+<div align="center">
+
+**Ways to Contribute:**
+
+| 🐛 Report Bugs | ✨ Request Features | 🔧 Submit PRs | 📖 Improve Docs |
+|:-------------:|:------------------:|:------------:|:--------------:|
+| [Open Issue](https://github.com/nihalnihalani/Clipit/issues) | [Feature Request](https://github.com/nihalnihalani/Clipit/issues) | [Pull Request](https://github.com/nihalnihalani/Clipit/pulls) | [Edit Docs](https://github.com/nihalnihalani/Clipit) |
+
+</div>
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+ClipIt wouldn't be possible without these amazing projects:
+
+<div align="center">
+
+| Project | Purpose |
+|:--------|:--------|
+| 🦙 **[Meta Llama-3.2](https://huggingface.co/meta-llama)** | Local AI language model |
+| 👁️ **[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)** | Optical character recognition |
+| 🎨 **[PyQt5](https://www.riverbankcomputing.com/software/pyqt/)** | Cross-platform GUI framework |
+| 🐕 **[PastePup](https://github.com/josh-works/pastepup)** | Original macOS/Swift inspiration |
+
+</div>
+
+---
+
+## 💬 Support
+
+Need help? We're here for you!
+
+<div align="center">
+
+| 📝 Documentation | 🐛 Issues | 💬 Discussions |
+|:----------------|:---------|:--------------|
+| [ARCHITECTURE.md](ARCHITECTURE.md) | [GitHub Issues](https://github.com/nihalnihalani/Clipit/issues) | [GitHub Discussions](https://github.com/nihalnihalani/Clipit/discussions) |
+| [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Report bugs & problems | Ask questions & share ideas |
+| [TESTING.md](TESTING.md) | Request features | Show what you've built |
+
+</div>
 
 ---
 
 <div align="center">
 
-**Made with care for productivity**
+## ⭐ Star History
 
-![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![AI Powered](https://img.shields.io/badge/AI-Powered-FF6B6B?style=for-the-badge)
+If you find ClipIt useful, please consider giving it a star!
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nihalnihalani/Clipit&type=Date)](https://star-history.com/#nihalnihalani/Clipit&Date)
+
+---
+
+### 💖 Made with care for productivity enthusiasts
+
+<p>
+  <img src="https://img.shields.io/badge/Made_with-❤️-red?style=for-the-badge" alt="Made with Love">
+  <img src="https://img.shields.io/badge/Powered_by-AI-blue?style=for-the-badge" alt="Powered by AI">
+  <img src="https://img.shields.io/badge/Built_for-Windows-0078D6?style=for-the-badge&logo=windows" alt="Built for Windows">
+</p>
+
+**[⬆ Back to Top](#-clipit)**
 
 </div>
