@@ -357,25 +357,11 @@ ClipIt wouldn't be possible without these amazing projects:
 | <img src="https://img.icons8.com/?size=20&id=37410&format=png" alt="Llama"/> **[Meta Llama-3.2](https://huggingface.co/meta-llama)** | Local AI language model |
 | <img src="https://img.icons8.com/?size=20&id=cEcenq1dEbND&format=png" alt="OCR"/> **[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)** | Optical character recognition |
 | <img src="https://img.icons8.com/?size=20&id=104086&format=png" alt="PyQt"/> **[PyQt5](https://www.riverbankcomputing.com/software/pyqt/)** | Cross-platform GUI framework |
-| <img src="https://img.icons8.com/?size=20&id=PGpXkTUdCHk8&format=png" alt="Dog"/> **[PastePup](https://github.com/josh-works/pastepup)** | Original macOS/Swift inspiration |
+| <img src="https://img.icons8.com/?size=20&id=PGpXkTUdCHk8&format=png" alt="Dog"/> **[PastePup](https://github.com/BarathwajAnandan/pastepup)** | Original macOS/Swift inspiration |
 
 </div>
 
----
 
-## <img src="https://img.icons8.com/?size=32&id=118377&format=png" alt="Support"/> Support
-
-Need help? We're here for you!
-
-<div align="center">
-
-| <img src="https://img.icons8.com/?size=24&id=59877&format=png" alt="Docs"/> Documentation | <img src="https://img.icons8.com/?size=24&id=12599&format=png" alt="Issues"/> Issues | <img src="https://img.icons8.com/?size=24&id=59810&format=png" alt="Discussions"/> Discussions |
-|:----------------|:---------|:--------------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | [GitHub Issues](https://github.com/nihalnihalani/Clipit/issues) | [GitHub Discussions](https://github.com/nihalnihalani/Clipit/discussions) |
-| [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Report bugs & problems | Ask questions & share ideas |
-| [TESTING.md](TESTING.md) | Request features | Show what you've built |
-
-</div>
 
 ---
 
